@@ -14,13 +14,13 @@ class RelationshipsController < ApplicationController
   # フォロー一覧表示
   def giv_followed
     user = User.find(params[:user_id])
-    @users = user.followings
+    @users = user.giv_followed
   
   end
   
   # フォロワー一覧表示
   def take_follower
     user = User.find(params[:user_id])
-    @users = user.followings
+    @users = user.take_follower
   end
 end
