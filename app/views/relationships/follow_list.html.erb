@@ -1,0 +1,30 @@
+
+<h1>Follower Users</h1>
+
+<% if users.exists? %>
+ <% users.each do |user| %>
+  <table>
+    <thead>
+      <tr>
+        <th>iamge</th>
+        <th>name</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr>
+        <td><%= image_tag user.get_profile_image, size: "50x50" %></td>
+        <td><%=user.name%></td>
+        <td>フォロー数：<%= user.giv_followed.count %></td>
+        <td>フォロワー数：<%= user.take_follower.count %></td>
+      </tr>
+    </tbody>
+  </table>
+  <% end %>
+  <% else %>
+   <p>ユーザーはいません</p>
+  <% end %>
+  
