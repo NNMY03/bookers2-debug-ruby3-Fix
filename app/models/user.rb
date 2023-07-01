@@ -7,6 +7,18 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+
+#フォローした、された関係性
+has_many :give_relationships, class_name: "Relationship",foreign_key: "followed_id", dependent: :destroy
+has_many :take_relationships, class_name: "Relationship",foreign_key: "follower_id", dependent: :destroy
+
+#どのテーブルとアソシエーションしているか指定する
+#foreign_kyeの後ろには関連付けるカラム名を入力する
+
+has_many :giv_followed, through: :give_relationships, source: :followed
+has_many :take_follower, through: :take_relationships, source: :follower
+
+
   
   has_one_attached :profile_image
 
@@ -14,7 +26,6 @@ class User < ApplicationRecord
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }, uniqueness: true
-
   
   
   def get_profile_image
