@@ -18,7 +18,20 @@ has_many :take_relationships, class_name: "Relationship",foreign_key: "follower_
 has_many :giv_followed, through: :give_relationships, source: :followed
 has_many :take_follower, through: :take_relationships, source: :follower
 
+# フォローしたときの処理
+def follow(user_id)
+  take_relationships.create(followed_id: user_id)
+end
 
+# フォローを外した時の処理
+def unfollow(user_id)
+  take_relationships.find_by(followed_id: user_id).destroy
+end
+
+#フォローしているか判定
+def giv_followed?(user)
+  giv_followed.include?(user)
+end
   
   has_one_attached :profile_image
 
