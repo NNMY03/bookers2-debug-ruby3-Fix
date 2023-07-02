@@ -1,26 +1,24 @@
 class RelationshipsController < ApplicationController
-  # フォローするとき
+  before_action :authenticate_user!
   def create
-    current_user.follow(params[:user_id])
+    user = User.find(params[:user_id])
+    current_user.follow(user)
     redirect_to request.referer
   end
   
-  # ふぉろーはずすとき
   def destroy
-    current_user.unfollow(params[:user_id])
-    redirect_to request.referer
+    user = User.find(params[:user_id])
+    current_user.unfollow(user)
+    redirect_to  request.referer
   end
   
-  # フォロー一覧表示
-  def giv_followed
+  def followings
     user = User.find(params[:user_id])
-    @users = user.giv_followed
-  
+    @users = user.followings
   end
   
-  # フォロワー一覧表示
-  def take_follower
+  def followers
     user = User.find(params[:user_id])
-    @users = user.take_follower
+    @users = user.followers
   end
 end
