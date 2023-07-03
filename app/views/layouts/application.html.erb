@@ -13,10 +13,10 @@
   <body>
     <%= render 'layouts/header' %>
       <main>
-       <div class="">
         <%= flash[:notice] %>
-        <%= render 'searches/form' %>
-        </div>
+         <div class="d-flex justify-content-center mb-2" >
+          <%= render 'searches/form', class: 'd-flecx justify-content-center' %>
+         </div> 
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>

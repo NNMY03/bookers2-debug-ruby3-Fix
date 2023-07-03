@@ -52,15 +52,15 @@ class User < ApplicationRecord
       # 完全一致
     if search == "perfect_match"
       @user = User.where("name LIKE?", "#{word}")
-      # 前方一致
+      # 前方一致　elsif→条件の追加を行う
     elsif search == "forward_match"
-      @user = User.where("name LIKE?", "#{word}")
+      @user = User.where("name LIKE?", "#{word}%")
       # 後方一致
     elsif search == "backward_match"
-      @user = User.where("name LIKE?", "#{word}")
+      @user = User.where("name LIKE?", "%#{word}")
       # 部分一致
     elsif search == "partial_match"
-      @user = User.where("name LIKE?", "#{word}")
+      @user = User.where("name LIKE?", "%#{word}%")
     else
       @user = User.all
     end

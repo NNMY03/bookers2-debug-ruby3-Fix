@@ -17,13 +17,13 @@ class Book < ApplicationRecord
       @book = Book.where("title LIKE?", "#{word}")
       # 前方一致
     elsif search == "forward_match"
-      @book = Book.where("title LIKE?", "#{word}")
+      @book = Book.where("title LIKE?", "#{word}%")
       # 後方一致
     elsif search == "backward_match"
-      @book = Book.where("title LIKE?", "#{word}")
+      @book = Book.where("title LIKE?", "%#{word}")
       # 部分一致
     elsif search == "partial_match"
-      @book = Book.where("title LIKE?", "#{word}")
+      @book = Book.where("title LIKE?", "%#{word}%")
     else
       @book = Book.all
     end
