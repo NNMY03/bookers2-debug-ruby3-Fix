@@ -13,9 +13,10 @@
   <body>
     <%= render 'layouts/header' %>
       <main>
-       <div>
+       <div class="">
         <%= flash[:notice] %>
-       </div>
+        <%= render 'searches/form' %>
+        </div>
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>

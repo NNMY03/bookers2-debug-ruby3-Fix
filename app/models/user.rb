@@ -46,4 +46,23 @@ class User < ApplicationRecord
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
+  
+  # Userテーブル検索方法分岐
+  def self.looks(search, word)
+      # 完全一致
+    if search == "perfect_match"
+      @user = User.where("name LIKE?", "#{word}")
+      # 前方一致
+    elsif search == "forward_match"
+      @user = User.where("name LIKE?", "#{word}")
+      # 後方一致
+    elsif search == "backward_match"
+      @user = User.where("name LIKE?", "#{word}")
+      # 部分一致
+    elsif search == "partial_match"
+      @user = User.where("name LIKE?", "#{word}")
+    else
+      @user = User.all
+    end
+  end
 end
