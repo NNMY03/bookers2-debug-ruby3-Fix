@@ -33,6 +33,9 @@
             
             
             <td>コメント数：<%= @book.book_comments.count %></td>
+            
+            <td><%= render "static.rate", book: @book %></td>
+
             </tr>
           </table>
           
