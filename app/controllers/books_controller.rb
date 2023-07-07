@@ -14,6 +14,20 @@ class BooksController < ApplicationController
   def index
     @book = Book.new
     @books = Book.all
+
+# if分とelsifで条件の追記を行う
+#モデルで設定したlatestメソッドの値を取得
+  if params[:latest]
+#インスタンス変数にBookモデルのlatestカラムの値を渡す
+    @books = Book.latest
+#条件の追加
+  elsif params[:star_count]
+    @books = Book.star_count
+#条件終了後allデータを取得する
+  else
+    @books = Book.all
+  end
+
   end
 
   def create
@@ -61,6 +75,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :comment, :star)
+    params.require(:book).permit(:title, :body, :comment, :star, :latest)
   end
 end

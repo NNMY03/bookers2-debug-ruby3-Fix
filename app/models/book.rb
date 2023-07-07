@@ -10,6 +10,10 @@ class Book < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   
+  # 並べ替え
+  scope :latest, -> {order("created_at desc")}
+  scope :star_count, -> {order("star desc")}
+  
   # Bookテーブル検索方法分岐
   def self.looks(search, word)
       # 完全一致

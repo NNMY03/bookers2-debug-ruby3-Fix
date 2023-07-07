@@ -2,6 +2,7 @@
 <% if @range == "User" %>
   <h1>Users search for<%= @word %></h1>
    <%= render "/users/index", users: @users %>
+<!--rangeアクションがBookだった場合-->
 <% else @range == "Book" %>
   <h1>Books search for<%= @word %></h1>
    <%= render "/books/index", books: @books %>
