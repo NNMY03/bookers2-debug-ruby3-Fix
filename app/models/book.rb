@@ -4,6 +4,7 @@ class Book < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   
   validates :title, presence: true
+  validates :category, presence: true
   validates :body, presence: true, length: { maximum: 200 }
   
   def favorited_by?(user)
@@ -31,5 +32,10 @@ class Book < ApplicationRecord
     else
       @book = Book.all
     end
+  end
+  
+  # タグ検索
+  def self.search(search_word)
+    Book.where(['category LIKE ?', "#{search_word}"])
   end
 end

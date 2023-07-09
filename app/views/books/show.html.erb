@@ -22,20 +22,28 @@
           </td>
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
+          
+          <td>
+            <% if @book.category.present? %>
+            <%= link_to @book.category, search_book_path(@book.category)%>
+            <% end %>
+          </td>
+          
+          <td id="favorite_buttons_<%= @book.id %>">
+          <%= render 'favorites/favorite', book: @book %>
+          </td>
+
+                      
+          <td>コメント数：<%= @book.book_comments.count %></td>
+            
+          <td><%= render "static.rate", book: @book %></td>
+
+
             <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
             
-            <td id="favorite_buttons_<%= @book.id %>">
-              <%= render 'favorites/favorite', book: @book %>
-            </td>
-            
-            
-            <td>コメント数：<%= @book.book_comments.count %></td>
-            
-            <td><%= render "static.rate", book: @book %></td>
-
             </tr>
           </table>
           
