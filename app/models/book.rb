@@ -11,6 +11,12 @@ class Book < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   
+  # 投稿数表示
+  scope :today_count, -> {where('created_at > ? ',Date.today)}
+  scope :agoday_count, -> {where(created_at: 1.day.ago.all_day)}
+  scope :toweek_count, -> {where(created_at: 6.day.ago.beginning_of_day..Time.zone.now.end_of_day) } 
+  scope :agoweek_count, -> {where(created_at: 2.week.ago.beginning_of_day..1.week.ago.end_of_day) } 
+  
   # 並べ替え
   scope :latest, -> {order("created_at desc")}
   scope :star_count, -> {order("star desc")}

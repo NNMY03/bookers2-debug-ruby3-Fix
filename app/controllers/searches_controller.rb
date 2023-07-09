@@ -15,7 +15,6 @@ before_action :authenticate_user!
   
 #   タグ検索窓用に新しくアクションを作成
   def search_book
-    @model = Book  #search機能とは関係なし
     @word = params[:word]
     @books = Book.where("category LIKE?","%#{@word}%")
     render searches_search_path

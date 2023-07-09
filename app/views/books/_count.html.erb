@@ -1,0 +1,45 @@
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>今日の投稿数</th>
+      <th>前日の投稿数</th>
+      <th>前日比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= current_user.books.today_count.count %></td>
+      <td><%= current_user.books.agoday_count.count %></td>
+      <td><% the_day_before = books.today_count.count / books.agoday_count.count.to_f  %>
+       　<%= BigDecimal(the_day_before * 100).ceil(2).to_f %>%</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>今週の投稿数</th>
+      <th>前週の投稿数</th>
+      <th>前週比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= current_user.books.toweek_count.count %></td>
+      <td><%= current_user.books.agoweek_count.count %></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<!--<table class="table-->
+<!--table-hover カーソルを合わせると選択を強調する-->
+<!--table-inverse テーブルの背景色を反転する-->
+<!--">-->
+<!--<thead>-->
+<!--<tr>テーブル行を指定-->
+<!--<th>テーブルの見出しやタイトルにつける-->
+<!--<th colspan="">行を指定した数字分結合する-->
+<!--<td>テーブルの内容作成に用いる-->
