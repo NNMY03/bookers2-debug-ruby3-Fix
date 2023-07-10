@@ -11,8 +11,12 @@
     <tr>
       <td><%= current_user.books.today_count.count %></td>
       <td><%= current_user.books.agoday_count.count %></td>
-      <td><% the_day_before = books.today_count.count / books.agoday_count.count.to_f  %>
-       　<%= BigDecimal(the_day_before * 100).ceil(2).to_f %>%</td>
+      <% if current_user.books.agoday_count.count == 0 %>
+      <td>前日の投稿数０</td>
+      <% else %>
+      <td><% the_day_before = books.today_count.count.to_f / books.agoday_count.count.to_f  %>
+       　<%= (the_day_before * 100).round %>%</td>
+      <% end %>
     </tr>
   </tbody>
 </table>
@@ -29,17 +33,12 @@
     <tr>
       <td><%= current_user.books.toweek_count.count %></td>
       <td><%= current_user.books.agoweek_count.count %></td>
-      <td></td>
+      <% if current_user.books.agoweek_count.count == 0 %>
+      <td>前週の投稿数０</td>
+      <% else %>
+      <td><%= the_week_before = current_user.books.toweek_count.count / current_user.books.agoweek_count.count.to_f %>
+          <%= (the_week_before * 100).round(1) %>%</td>
+      <% end %>
     </tr>
   </tbody>
 </table>
-
-<!--<table class="table-->
-<!--table-hover カーソルを合わせると選択を強調する-->
-<!--table-inverse テーブルの背景色を反転する-->
-<!--">-->
-<!--<thead>-->
-<!--<tr>テーブル行を指定-->
-<!--<th>テーブルの見出しやタイトルにつける-->
-<!--<th colspan="">行を指定した数字分結合する-->
-<!--<td>テーブルの内容作成に用いる-->
